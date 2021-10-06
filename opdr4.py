@@ -39,7 +39,7 @@ def stap3():
 
     elif proceed == 'n':
         
-        bon()
+        return
     else:
         print('Sorry, dat snap ik niet.')
         stap3()
@@ -71,11 +71,39 @@ def bon():
         prijsijs = 0.75
     een = 1.1
     global totaalprijs
-    totaalprijs = round(bolletjes * een + prijsijs,2)
-    print(' uw totale bedrag is: ' + (str)(totaalprijs)) 
+    totaalprijs = round(bolletjes * een + prijsijs + toppingc2,2)
+    print(  'bolletjes  ' +(str)(bolletjes) + ' x      $' + (str)(een)  )
+    print((str)(ijs) +  '  1 x $    ' + (str)(prijsijs))
+    print ((str)(toppingc) + ' 1 x $' + (str)(toppingc2))
+    print(' uw totale bedrag is: $' + (str)(totaalprijs)) 
     print('Bedankt en tot ziens!')
     return
 
+def topping():
+    global toppingp
+    global toppingc
+    global toppingc2
+    toppingp = input('Wat voor topping wilt u: A) Geen, B) Slagroom, C) Sprinkels of D) Caramel Saus?: ')
+    toppingp.lower()# if ijs = bakje = 0.30 more still has to be added later on in function
+    if toppingp == 'a':
+        toppingc = '0'
+        toppingc2 = 0
+    elif toppingp == 'b':
+        toppingc = 'slagroom'
+        toppingc2 = 0.50
+    elif toppingp == 'c':
+        toppingc = 'sprinkels'
+        toppingc2 = 0.30 * bolletjes
+    elif toppingp == 'd':
+        toppingc = 'caramel saus'
+        if ijs == 'bakje':
+            toppingc2 = 0.90
+        else:
+            toppingc2 = 0.60
+    else:
+        print('Sorry, Dat snap ik niet')
+        topping()
+    return
 
 def kopen():
     try:
@@ -88,9 +116,15 @@ def kopen():
     elif bolletjes > 3:
         global ijs
         ijs = 'bakje'
+    topping()
     stap4()
     stap3()
+    bon()
+    return
+
+
 kopen()
+
 
 
 
